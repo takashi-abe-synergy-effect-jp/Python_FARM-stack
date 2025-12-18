@@ -19,7 +19,7 @@ async def create_todo(request: Request, response: Response, data: TodoBody, csrf
     res = await db_create_todo(todo)
     response.status_code = HTTP_201_CREATED
     response.set_cookie(
-        kew="access_token", value=f"Bearer {new_token}", httponly=True, samesite="none", secure=True)
+        key="access_token", value=f"Bearer {new_token}", httponly=True, samesite="none", secure=True)
     if res:
         return res
     raise HTTPException(
@@ -36,7 +36,7 @@ async def get_single_todo(request: Request, response: Response, id: str):
     new_token, _ = auth.verify_update_jwt(request)
     res = await db_get_single_todo(id)
     response.set_cookie(
-       kew="access_token", value=f"Bearer {new_token}", httponly=True, samesite="none", secure=True)
+       key="access_token", value=f"Bearer {new_token}", httponly=True, samesite="none", secure=True)
     if res:
         return res
     raise HTTPException(
@@ -49,7 +49,7 @@ async def update_todo(request: Request, response: Response, id: str, data: TodoB
     todo = jsonable_encoder(data)
     res = await db_update_todo(id, todo)
     response.set_cookie(
-       kew="access_token", value=f"Bearer {new_token}", httponly=True, samesite="none", secure=True)
+       key="access_token", value=f"Bearer {new_token}", httponly=True, samesite="none", secure=True)
     if res:
         return res
     raise HTTPException(
