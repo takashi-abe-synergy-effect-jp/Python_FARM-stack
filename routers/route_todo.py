@@ -61,7 +61,7 @@ async def delete_todo(request: Request, response: Response, id: str, csrf_protec
         request, csrf_protect, request.headers)
     res = await db_delete_todo(id)
     response.set_cookie(
-       kew="access_token", value=f"Bearer {new_token}", httponly=True, samesite="none", secure=True)
+       key="access_token", value=f"Bearer {new_token}", httponly=True, samesite="none", secure=True)
     if res:
         return {'message': 'Successfully delete'}
     raise HTTPException(
